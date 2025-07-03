@@ -6,7 +6,7 @@ from pygame.font import Font
 from pygame import Surface, Rect
 
 from code.Const import C_WHITE, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, C_GREEN, C_CYAN, EVENT_TIMEOUT, \
-    TIMEOUT_STEP, TIMEOUT_LEVEL, WIN_HEIGHT
+    TIMEOUT_STEP, TIMEOUT_LEVEL, WIN_HEIGHT, C_BLUE
 
 from code.Enemy import Enemy
 from code.Entity import Entity
@@ -22,7 +22,7 @@ class Level:
         self.name = name
         self.game_mode = game_mode
         self.entity_list: list[Entity] = []
-        self.entity_list.extend(EntityFactory.get_entity('self.name' + 'Bg'))
+        self.entity_list.extend(EntityFactory.get_entity(self.name + 'Bg'))
         player = EntityFactory.get_entity('Jogador 1')
         player.score = player_score[0]
         self.entity_list.append(player)
@@ -32,9 +32,6 @@ class Level:
             self.entity_list.append(player)
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
-
-
-
 
     def run(self, player_score: list[int]):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3')
@@ -51,9 +48,9 @@ class Level:
                     if shoot is not None:
                         self.entity_list.append(shoot)
                 if ent.name == 'Jogador 1':
-                    self.level_text(14, f'Jogador 1 - Saúde: {ent.health} | Score: {ent.score}', C_GREEN, (10, 25))
+                    self.level_text(20, f'Jogador 1 - Saúde: {ent.health} | Score: {ent.score}', C_GREEN, (10, 25))
                 if ent.name == 'Jogador 2':
-                    self.level_text(14, f'Jogador 2 - Saúde: {ent.health} | Score: {ent.score}', C_CYAN, (10, 45))
+                    self.level_text(20, f'Jogador 2 - Saúde: {ent.health} | Score: {ent.score}', C_CYAN, (10, 45))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -80,8 +77,8 @@ class Level:
                     return False
 
             # printed text
-            self.level_text(14, f'{self.name} - Tempo: {self.timeout / 1000:.1f}s', C_WHITE, (10, 5))
-            self.level_text(14, f'fps: {clock.get_fps():.0f}',C_WHITE, (10, WIN_HEIGHT - 35))
+            self.level_text(20, f'{self.name} - Tempo: {self.timeout / 1000:.1f}s', C_BLUE, (10, 5))
+            self.level_text(20, f'fps: {clock.get_fps():.0f}',C_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entidades: {len(self.entity_list)}', C_WHITE, (10, WIN_HEIGHT - 20))
             pygame.display.flip()
 
