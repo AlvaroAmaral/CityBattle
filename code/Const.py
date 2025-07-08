@@ -124,11 +124,11 @@ PLAYER_KEY_LEFT = {'Jogador 1': pygame.K_a,
 PLAYER_KEY_RIGHT = {'Jogador 1': pygame.K_d,
                     'Jogador 2': pygame.K_RIGHT}
 PLAYER_KEY_SHOOT = {'Jogador 1': pygame.K_LCTRL,
-                    'Jogador 2': pygame.K_SPACE}
+                    'Jogador 2': pygame.K_RCTRL}
 
 
 # S
-SPAWN_TIME = 4000
+SPAWN_TIME = 2700
 
 # T
 TIMEOUT_STEP = 100  # 100ms
